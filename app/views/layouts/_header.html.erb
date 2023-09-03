@@ -1,5 +1,6 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="d-flex flex-column vh-100">
+<header class="shadow-sm">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="/"><span>Bookers</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,51 +8,60 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
+
+        <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <li>
+          <li class="nav-item">
             <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
               <i class="fas fa-home"></i>home
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%=  link_to users_path, class: 'nav-link text-light' do %>
               <i class="fas fa-users"></i>users
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%=  link_to books_path , class: 'nav-link text-light' do %>
               <i class="fas fa-book-open"></i>books
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i>log out
             <% end %>
           </li>
         <% else %>
-          <li>
+          <li class="nav-item">
             <%= link_to root_path, class: 'nav-link text-light' do %>
               <i class="fas fa-home"></i>home
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to about_path, class: 'nav-link text-light' do %>
               <i class="fas fa-link"></i>about
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
               <i class="fas fa-user-plus"></i>sig nup
             <% end %>
           </li>
-          <li>
+          <li class="nav-item">
             <%= link_to new_user_session_path , class: 'nav-link text-light' do %>
               <i class="fas fa-sign-in-alt"></i>log in
-            <% end %>
           </li>
-        <% end %>
+            <% end %>
+            <% end %>
         </ul>
+
       </div>
     </div>
   </nav>
 </header>
+
+      <main class="mb-auto">
+        <p id="notice"><%= notice %></p>
+        <%= yield %>
+      </main>
+</body>

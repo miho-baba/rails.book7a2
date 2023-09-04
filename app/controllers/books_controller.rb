@@ -28,6 +28,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     if @user != current_user
+      flash[:notice] = "You have updated book successfully."
       redirect_to books_path
     end
   end

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     unless @user.id == current_user.id
+      flash[:notice] = "You have updated user successfully."
       render :edit
     else
       redirect_to user_path

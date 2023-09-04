@@ -26,10 +26,9 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    if @book.user == current_user
-    render :edit
-    else
-  redirect_to books_path
+    @user = @book.user
+    if @user != current_user
+      redirect_to books_path
     end
   end
 
@@ -48,8 +47,8 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    book = Book.find(params[:id])
-    book.destoy
+    @book = Book.find(params[:id])
+    @book.destroy
     redirect_to '/books'
   end
 

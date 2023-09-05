@@ -23,6 +23,22 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'index', books: @books%>
+      <% if @book.favorited_by?(current_user) %>
+        <td>
+          <%= link_to books_path method: :delete do %>
+          <span style="color:red;">♥</span>
+        </td>
+      <% end %>
+      <% else %>
+        <td>
+          <%= link_to books_path method: :post do %>
+          <span style="color:blue;">♥</span>
+        </td>
+      <% end %>
+      <% end %>
+      </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 </div>

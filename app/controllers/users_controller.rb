@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def follows
-   user = User.find(params[:id])
-   @users = user.following_users
+    user = User.find(params[:id])
+    @users = user.following_users
   end
 
  def followers
-   user = User.find(params[:id])
-   @users = user.follower_users
+    user = User.find(params[:id])
+    @users = user.follower_users
  end
 
   def show

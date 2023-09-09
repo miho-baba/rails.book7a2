@@ -23,6 +23,12 @@
               <%= @book.title %>
             <% end %>
           </td>
+          <td id="favorite_btn_<%= @book.id %>" >
+            <%= render "favorites/favorite", book: @book %>
+          </td>
+          <td id="comment_counter">
+             <%= render "book_comments/counter", book: @book %>
+          </td>
           <td><%= @book.body %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit" %></td>
@@ -30,39 +36,13 @@
           <% if @book.user == current_user %>
             <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, class: 'btn btn-sm btn-danger destroy'%></td>
           <% end %>
-
-          <td id="favorite_btn_<%= @book.id %>" >
-            <%= render "favorites/favorite", book: @book %>
-          </td>
-
-          <td><p>コメント数：<%= @book.book_comments.count %></p></td>
         </tr>
       </tbody>
       </table>
-      <table class="table table-hover table-inverse">
-        <tbody>
-          <% @book.book_comments.each do |book_comment| %>
-        <tr>
-          <td>
-            <%= link_to user_path(book_comment.user) do %>
-                  <%= image_tag book_comment.user.get_profile_image(100,100) %>
-                  <%= book_comment.user.name %>
-            <% end %>
-          </td>
-          <td><%= book_comment.comment %></td>
-          <td>
-            <% if book_comment.user == current_user %>
-              <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: 'btn btn-sm btn-danger destroy'%>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-        </tbody>
-      </table>
-        <%= form_with model: [@book, @book_comment],local: true do |f| %>
-          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100" %>
-            <%= f.submit "送信" %>
-        <% end %>
+      <div id="comment_index">
+         <%= render "book_comments/index", book: @book %>
+      </div>
+        <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
       </div>
     </div>
   </div>
